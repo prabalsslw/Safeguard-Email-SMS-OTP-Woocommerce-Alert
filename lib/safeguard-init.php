@@ -1,6 +1,4 @@
 <?php
-    defined( 'ABSPATH' ) or die(); 
-
     # Protect from alien invasion
 
     # Setup Database Table

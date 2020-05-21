@@ -54,9 +54,10 @@
 	            if(isset($safeg_settings['email_otp_disable']) && isset($safeg_settings['enable_plugin']))
 	            {
 	            	$user = unserialize( $login_attempt->user_obj );
-	                $message = "{$user->user_nicename}, \r\n\r\n";
-	                $message .= "Your One Time Pin is: {$otp}\r\n\r\n";
+	                $message = "Dear {$user->user_nicename}, \r\n\r\n";
+	                $message .= "Your One Time Pin is: <b>{$otp}</b>\r\n\r\n";
 	                $message .= "This pin is only valid for the next {$safeg_settings['timeout']} minutes. \r\n\r\n";
+	                $message .= "Thanks & Regards,\r\n\r\n";
 	                $message .= get_bloginfo('name');
 	                $headers = 'From: ' . get_bloginfo('name') . ' <' . $safeg_settings['from_email'] . '>';
 
