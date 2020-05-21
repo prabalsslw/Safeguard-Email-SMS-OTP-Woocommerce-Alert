@@ -24,6 +24,7 @@ $logins = $wpdb->get_results(
                 <th scope="col" class="manage-column column-date" style="">Login Time</th>
                 <th scope="col" class="manage-column column-date" style=""><span>IP Address</span></th>
                 <th scope="col" class="manage-column column-text" style=""><span>Login Status</span></th>
+                <th scope="col" class="manage-column column-text" style=""><span>OTP Channel</span></th>
                 <th scope="col" class="manage-column column-text" style=""><span>OTP Resent</span></th>
                 <th scope="col" class="manage-column column-text" style=""><span>SMS API Response</span></th>
             </tr>
@@ -35,6 +36,7 @@ $logins = $wpdb->get_results(
                 <th scope="col" class="manage-column column-date" style="">Login Time</th>
                 <th scope="col" class="manage-column column-text" style=""><span>IP Address</span></th>
                 <th scope="col" class="manage-column column-text" style=""><span>Login Status</span></th>
+                <th scope="col" class="manage-column column-text" style=""><span>OTP Channel</span></th>
                 <th scope="col" class="manage-column column-text" style=""><span>OTP Resent</span></th>
                 <th scope="col" class="manage-column column-text" style=""><span>SMS API Response</span></th>
             </tr>
@@ -67,6 +69,7 @@ $logins = $wpdb->get_results(
                 <td><?php echo $login->login_time; ?></td>
                 <td><?php echo $login->user_ip; ?></td>
                 <td><?php echo $login_status; ?></td>
+                <td><?php echo $login->otp_destination; ?></td>
                 <td><?php echo $login->otp_sent_limit; ?></td>
                 <td><?php print_r($login->sms_ref_id); ?></td>
             </tr>

@@ -2,7 +2,7 @@
 	# Validate login with OTP
 	$safeg_settings = get_option( 'safeg_setting' );
 
-	if(isset($safeg_settings['enable_plugin']) && !empty($safeg_settings['enable_plugin'] ))
+	if((isset($safeg_settings['enable_plugin']) && !empty($safeg_settings['enable_plugin'] )) && (isset($safeg_settings['otp_enable']) || isset($safeg_settings['email_otp_disable'])) )
 	{
 		add_filter( 'authenticate', 'safeg_auth_login', 30, 3 );
 	}
@@ -91,16 +91,28 @@
 	    }
 	}
 
+	function safeg_error_code_sanitize($ecode)
+	{
+		if(is_numeric($ecode))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	# Display error message on login page
-	function safeg_modify_html() {
-	    $safeg_error = isset($_GET['safeg_error']) ? esc_html__($_GET['safeg_error']) : '';
-	    // if (safeg_error_code_sanitize($_GET['safeg_error'])) {
-	    //     $safeg_error = esc_html__($_GET['safeg_error']);
-	    // }
-	    // else
-	    // {
-	    //     $safeg_error = '';
-	    // }
+	function safeg_modify_html() 
+	{
+	    if (isset($_GET['safeg_error']) && safeg_error_code_sanitize($_GET['safeg_error'])) {
+	        $safeg_error = intval($_GET['safeg_error']);
+	    }
+	    else
+	    {
+	        $safeg_error = '';
+	    }
 
 	    if ( $safeg_error != '' ) {
 	        $login_error = get_query_var( 'safeg_error' );
@@ -117,11 +129,11 @@
 	            default:
 	                $message = '<strong>ERROR</strong>: Session timed out!';
 	        }
-	        add_filter( 'login_message', create_function( '', "return '<div id=\"login_error\">$message</div>';" ) );
+	        add_filter( 'login_message', function () use ($message) {return "<div id='login_error'>$message</div>";} );
 	    }
 	}
 
-	if(isset($safeg_settings['enable_plugin']) && !empty($safeg_settings['enable_plugin'] ))
+	if((isset($safeg_settings['enable_plugin']) && !empty($safeg_settings['enable_plugin'] )) && (isset($safeg_settings['otp_enable']) || isset($safeg_settings['email_otp_disable'])))
 	{
 		add_action( 'login_head', 'safeg_modify_html');
 	}

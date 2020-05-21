@@ -2,7 +2,7 @@
 
 ######################### Replaces WordPress' Pluggable wp_authenticate function ##########################
 
-if(isset($safeg_settings['enable_plugin']) && !empty($safeg_settings['enable_plugin']))
+if((isset($safeg_settings['enable_plugin']) && !empty($safeg_settings['enable_plugin'])) && (isset($safeg_settings['otp_enable']) || isset($safeg_settings['email_otp_disable'])) )
 {		
 	if ( !function_exists('wp_authenticate') ) :
 	  function wp_authenticate($username, $password) 

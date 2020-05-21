@@ -12,7 +12,7 @@
 
 
 
-	if(isset($safeg_settings['enable_plugin']) && $safeg_settings['enable_plugin'] != "")
+	if((isset($safeg_settings['enable_plugin']) && !empty($safeg_settings['enable_plugin'])) && (isset($safeg_settings['otp_enable']) || isset($safeg_settings['email_otp_disable'])))
 	{
 		global $wpdb;
 		$auth_token = sanitize_key($wp->query_vars['safeg_auth']);
@@ -118,17 +118,32 @@
 
 		        if ( NULL == $login_attempt->otp ) 
 		        {
+		        	$destination = "";
+		        	if(isset($safeg_settings['otp_enable']))
+		        	{
+		        		$destination = 'SMS OTP'; 
+		        	}
+		        	if(isset($safeg_settings['email_otp_disable']))
+		        	{
+		        		$destination = 'Email OTP'; 
+		        	}
+		        	if(isset($safeg_settings['otp_enable']) && isset($safeg_settings['email_otp_disable']))
+		        	{
+		        		$destination = 'SMS, Email OTP'; 
+		        	}
+
 		            $user = unserialize( $login_attempt->user_obj );
 		            $otp = mt_rand(100000, 999999);
 
 		            $wpdb->update(
 		                $table_name,
 		                array(
-		                    'otp' => $otp
+		                    'otp' => $otp,
+		                    'otp_destination' => sanitize_text_field($destination)
 		                ),
 		                array( 'auth_token' => $auth_token ),
 		                array(
-		                    '%d'
+		                    '%d', '%s'
 		                ),
 		                array( '%s' )
 		            );
@@ -139,8 +154,6 @@
 
 		            if((isset($all_meta_for_user['safeg_phone_number'][0]) || isset($all_meta_for_user['billing_phone'][0])) && isset($safeg_settings['otp_enable']) && isset($safeg_settings['enable_plugin']))
 		            {
-		            	// echo "<pre>";
-		            	// print_r($safeg_settings);
 		                if(isset($all_meta_for_user['safeg_phone_number'][0]) && $all_meta_for_user['safeg_phone_number'][0] != "")
 		            	{
 		            		$safeg_phone_no = $all_meta_for_user['safeg_phone_number'][0];
@@ -196,7 +209,7 @@
 		                if ( ! has_action( "safeg_otp_send" ) ) {
 		                    add_action( "safeg_otp_send", "safeg_otp_email", 10, 4 );
 		                }
-
+		            
 		                do_action( "safeg_otp_send", $user, $otp, $message, $headers );
 		            }
 		        }

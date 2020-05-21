@@ -8,7 +8,7 @@
 * Stable tag: 1.0.0
 * Author: Prabal Mallick
 * Author URI: https://prabalsslw.wixsite.com/prabal
-* WC tested up to: 4.1.0
+* WC tested up to: 4.1.1
 * License: GPL2
 **/
 
@@ -43,17 +43,19 @@
 
 	new Safeguard_Admin_Option;
 
-
 	if(isset($options['enable_plugin']) && !empty($options['enable_plugin']))
 	{
 		new Safeguard_Registration_field;
 	}
+
+
 	# Install Plugin
 	register_activation_hook( __FILE__, 'safeg_active' );
 
 	function safeg_active() {
 		Safeguard_Init::safeg_install();
 		safeg_init_internal();
+		safeg_re_init_internal();
 		flush_rewrite_rules();
 	}
 

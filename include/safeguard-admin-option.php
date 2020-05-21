@@ -121,7 +121,7 @@
 
 		    add_settings_field(
 		        'otp_enable',
-		        __('Disable Email OTP', $plugin_slug),
+		        __('Enable Email OTP', $plugin_slug),
 		        array( $this, 'safeg_email_otp_disable_callback'),
 		        'safeg_setting',
 		        'otp_settings_section'
@@ -350,8 +350,8 @@
 		    }
 
 		    $html = '<input type="checkbox" id="email_otp_disable" name="safeg_setting[email_otp_disable]" value="1"' . checked( 1, $email_otp_disable, false ) . '/>';
-		    $html .= '<label for="checkbox_example">Check to disable login Email OTP.</label><br>';
-		    $html .= '<label for="checkbox_example">By default email OTP enabled, yo can disable from here.</label>';
+		    $html .= '<label for="checkbox_example">Check to enable login Email OTP.</label><br>';
+		    // $html .= '<label for="checkbox_example">By default email OTP enabled, yo can disable from here.</label>';
 
 		    echo $html;
 		}
