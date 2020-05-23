@@ -51,7 +51,7 @@ $record = $wpdb->get_results(
                 <td><?php echo $value->user_ip; ?></td>
                 <td><?php echo $value->sms_type; ?></td>
                 <td><?php echo $value->phone_no; ?></td>
-                <td><?php print_r(unserialize($value->sms_ref_id)); ?></td>
+                <td><?php print_r($value->sms_ref_id); ?></td>
             </tr>
             <?php } ?>
         </tbody>

@@ -26,6 +26,9 @@
 	$options = get_option( 'safeg_setting' );
 
 	// echo "<pre>";
+	// print_r(get_user_meta( 3 ));
+
+	// echo "<pre>";
 	// print_r($options);
 	// echo "</pre>";
 	# Include required core files
@@ -36,16 +39,19 @@
 	require_once( SAFEG_PATH . 'lib/safeguard-authenticate.php' );
 	require_once( SAFEG_PATH . 'lib/safeguard-registration-field.php' );
 	require_once( SAFEG_PATH . 'lib/safeguard-rewrite-rules.php' );
+	require_once( SAFEG_PATH . 'lib/safeguard-woo-alert.php' );
 
 	use Safeguard\Admin\Option\Safeguard_Admin_Option;
 	use Safeguard\Admin\Init\Safeguard_Init;
 	use Safeguard\Admin\Registration\Safeguard_Registration_field;
+	use Safeguard\Admin\Woosms\Safeguard_Woo_Alert;
 
 	new Safeguard_Admin_Option;
 
 	if(isset($options['enable_plugin']) && !empty($options['enable_plugin']))
 	{
 		new Safeguard_Registration_field;
+		new Safeguard_Woo_Alert;
 	}
 
 
