@@ -1,6 +1,6 @@
 === Safegaurd ===
 Contributors: Prabal MallicK
-Tags: safe, secure, login, 2-step, verification, safety, otp, woocommerce, alert, email
+Tags: safe, secure, login, 2-step, verification, safety, otp, woocommerce, alert, email, pin
 Author URI: https://prabalsslw.github.io/
 Plugin URI: https://prabalsslw.github.io/
 Version: 1.0.0
@@ -10,33 +10,59 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Secure, 2 step Verification for WordPress login, via One Time Pin (OTP).
+Safeguard is an SMS & Email based OTP service provider plugin. Also available woocommerce transactional alert.
+
+== Prerequisites ==
+- Wordpress 5.x.x
+- WooCommerce 4.1.x
+- cURL php extension.
+
+== Download ==
+```sh
+Using HTTPS 
+$ git https://github.com/prabalsslw/Safeguard-Email-SMS-OTP-Woocommerce-Alert.git
+Using SSH 
+$ git clone git@github.com:prabalsslw/Safeguard-Email-SMS-OTP-Woocommerce-Alert.git
+```
 
 == Description ==
 
 Secure your WordPress site with WordPress Safegaurd.
 
-WordPress Safegaurd provides 2-step verification on login. Once a user submits their login credentials, a One Time Pin (OTP) is emailed to them. They need to enter this OTP in order to continue to login.
+WordPress Safegaurd provides 2-step verification on login. Once a user submits their login credentials, a One Time Pin (OTP) will be sent to them via SMS/Email. They will enter this OTP in order to continue to login. All it customer will able to get Woocommerce order alert notification via SMS.
 
 Stop Brute force hacking attempts, and keep your data safe!
 
     * Easy to install!
-    * Easy to replace the Email system with an SMS Gateway
+    * Email & SMS both are integrated
+    * Any SMS API can be Configurable
     * WordPress 4.0 Ready!
 
 == Installation ==
 
-Copy the "secure-login" folder to your WordPress Plugins directory via FTP. The WordPress Plugins directory is situated in "/wp-content/plugins/"
+- Step 1: Upload the plugin to wordpress admin panel. [Img-1]
+- Step 2: Go to `Real Protection` > `OTP Settings` page.
+- Step 3: Enable OTP checkbox for OTP & SMS Alert. `OTP SMS Text` must contain `{{OTP}}` dynamic variable. [Img-2]
+- Step 4: Both GET & POST API can be configurable, use API Endpoint, pass the API parameter with dynamic variable. Fixed dynamic variables: `{{phone_number}}, {{unique_id}}, {{sms_text}}`
+[Img-3]
+- Step 5: In the `Woocommerce Alert Configuration` part must enable `
+Enable Woocommerce Alert` for Woocommerce transaction alert. [Img-4]
+- Step 6: Enable your required Hook for transactional alert. [Img-4]
+- Step 7: You can change your `Woocommerce SMS Alert Templete`. Fixed dynamic variables: `{{name}}, {{status}}, {{amount}}, {{currency}}, {{order_id}}`. [Img-5]
+- Step 8: You can change your `User Registration Alert Templete`. Fixed dynamic variables: `{{name}}`. [Img-5]
+- Step 9: After successfully integrating the plugin you can see the reflection in the login and registration page. [Img-6]
+- Step 10: Plugin will add an extra field(Phone Number) in the registration form. [Img-7]
+- Step 11: Admin can check OTP & Alert SMS record from the admin panel . [Img-8]
 
-Once the "secure-login" folder has been copied to the WordPress Plugins directory, log in to your WordPress admin area (http://www.yourdomain.com/wp-admin).
-
-Click on the "Plugins" menu item. You will be redirected to the Plugins page. Locate the "Safegaurd" plugin, and click activate.
-
-**Note:** In order to use this plugin, you will need a valid WordPress install. This plugin will not work on a wordpress.com hosted site, and has not been tested on a Multi Site install.
+**Note:** In order to use this plugin, you will need a valid WordPress install. This plugin will not work on a wordpress.com hosted site.
 
 In order for this plugin to function correctly, you will need to use a permalink structure that uses rewrite rules. The "Post name" structure is recommended.
 
 For accurate login time tracking, make sure your correct Timezone is selected under "Settings" > "General".
 
+== License ==
+- `GPL2`
+
 == Changelog ==
+
 

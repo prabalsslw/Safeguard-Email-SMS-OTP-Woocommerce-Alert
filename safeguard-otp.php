@@ -25,12 +25,6 @@
 
 	$options = get_option( 'safeg_setting' );
 
-	// echo "<pre>";
-	// print_r(get_user_meta( 3 ));
-
-	// echo "<pre>";
-	// print_r($options);
-	// echo "</pre>";
 	# Include required core files
 
 	require_once( SAFEG_PATH . 'include/safeguard-admin-option.php' );
@@ -73,4 +67,23 @@
 	}
 
 	add_action( 'admin_enqueue_scripts', 'safeg_load_custom_admin_style' );
+
+
+	function safeg_plugin_links($links)
+	{
+	    $pluginLinks = array(
+            'settings' => '<a href="'. esc_url(admin_url('admin.php?page=safeguard-otp-settings')) .'">Settings</a>',
+            'docs'     => '<a href="https://prabalsslw.github.io/RP-OTP-Woocommerce/">Docs</a>',
+            'support'  => '<a href="mailto:prabalsslw@gmail.com">Support</a>'
+        );
+
+	    $links = array_merge($links, $pluginLinks);
+
+	    return $links;
+	}
+
+	$plugin = plugin_basename(__FILE__); 
+	add_filter("plugin_action_links_$plugin", 'safeg_plugin_links' );
+
+
 ?>
