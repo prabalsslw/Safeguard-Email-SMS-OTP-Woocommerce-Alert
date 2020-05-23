@@ -12,11 +12,11 @@
 
 	global $wpdb, $wp_version;
 
-	// $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}safeguard_otp" );
-	// $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}safeguard_wooalert" );
+	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}safeguard_otp" );
+	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}safeguard_wooalert" );
 
-	// delete_option("safeg_db_version");
-	// delete_option('safeg_setting');
+	delete_option("safeg_db_version");
+	delete_option('safeg_setting');
 
 	wp_cache_flush();
 
