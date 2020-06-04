@@ -73,7 +73,7 @@
 	{
 	    $pluginLinks = array(
             'settings' => '<a href="'. esc_url(admin_url('admin.php?page=safeguard-otp-settings')) .'">Settings</a>',
-            'docs'     => '<a href="https://prabalsslw.github.io/RP-OTP-Woocommerce/">Docs</a>',
+            'docs'     => '<a href="https://github.com/prabalsslw/Safeguard-Email-SMS-OTP-Woocommerce-Alert/blob/master/README.md">Docs</a>',
             'support'  => '<a href="mailto:prabalsslw@gmail.com">Support</a>'
         );
 
